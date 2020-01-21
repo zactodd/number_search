@@ -19,7 +19,6 @@ def number_search_doc(outfile):
     doc = DocxTemplate("templates/number_search_template.docx")
     doc.render({'grid': formatted_grid,  'search_table': formatted_words})
     doc.save(outfile)
-    print(outfile)
 
 
 def create_searches(n, func, out_dir="output"):
