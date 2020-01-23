@@ -7,7 +7,7 @@ from email import encoders
 import os
 
 
-def email_gmail(message, subject, to_address, from_address=None, login_key="key.json"):
+def send_gmail(message, subject, to_address, from_address=None, login_key="key.json", username=None, password=None):
     """
     Send emails using gmail.
     :param message: The message to be sent with the email.
@@ -15,17 +15,24 @@ def email_gmail(message, subject, to_address, from_address=None, login_key="key.
     :param to_address: address to send email to.
     :param from_address: address to send email from, defaults to login username if not specified.
     :param login_key: a json file containing the username and password information.
+    :param username: the username if not none and :param password is also not none.
+    :param password: the password if not none and :param username is also not none.
     """
-    with open(login_key, "r") as f:
-        data = json.load(f)
-        username, password = data["username"], data["password"]
+    assert (username is None and password is None) or (username is not None and password is not None), \
+        "Both username and password need to be included otherwise use login json file."
+    if username is None:
+        with open(login_key, "r") as f:
+            data = json.load(f)
+            username, password = data["username"], data["password"]
     if from_address is None:
         from_address = username
+
     formatted_message = f"From: {from_address}\r\nTo: {to_address}\r\nSubject: {subject}\r\n\r\n{message}"
     _gmail_server_send(username, password, from_address, to_address, formatted_message)
 
 
-def email_gmail_with_attachment(message, subject, attachment, to_address, from_address=None, login_key="key.json"):
+def send_gmail_with_attachment(message, subject, attachment, to_address, from_address=None, login_key="key.json",
+                               username=None, password=None):
     """
     Send emails using gmail.
     :param message: The message to be sent with the email.
@@ -34,13 +41,19 @@ def email_gmail_with_attachment(message, subject, attachment, to_address, from_a
     :param to_address: address to send email to.
     :param from_address: address to send email from, defaults to login username if not specified.
     :param login_key: a json file containing the username and password information.
+    :param username: the username if not none and :param password is also not none.
+    :param password: the password if not none and :param username is also not none.
     """
-    with open(login_key, "r") as f:
-        data = json.load(f)
-        username, password = data["username"], data["password"]
+    assert (username is None and password is None) or (username is not None and password is not None), \
+        "Both username and password need to be included otherwise use login json file."
 
+    if username is None:
+        with open(login_key, "r") as f:
+            data = json.load(f)
+            username, password = data["username"], data["password"]
     if from_address is None:
         from_address = username
+
     msg = MIMEMultipart()
     msg["From"], msg["To"], msg["Subject"] = from_address, to_address, subject
     msg.attach(MIMEText(message, "plain"))
@@ -62,3 +75,6 @@ def _gmail_server_send(username, password, from_address, to_address, message):
     server.sendmail(from_address, to_address, message)
     server.close()
 
+
+
+send_gmail("test 9", "Numbersearch", "zactodd0@gmail.com")
