@@ -75,6 +75,3 @@ def _gmail_server_send(username, password, from_address, to_address, message):
     server.sendmail(from_address, to_address, message)
     server.close()
 
-
-
-send_gmail("test 9", "Numbersearch", "zactodd0@gmail.com")
