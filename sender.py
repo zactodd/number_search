@@ -55,8 +55,10 @@ def email_gmail_with_attachment(message, subject, attachment, to_address, from_a
 
 
 def _gmail_server_send(username, password, from_address, to_address, message):
-    with smtplib.SMTP("smtp.gmail.com:587") as server:
-        server.ehlo()
-        server.starttls()
-        server.login(username, password)
-        server.sendmail(from_address, to_address, message)
+    server = smtplib.SMTP("smtp.gmail.com:587")
+    server.ehlo()
+    server.starttls()
+    server.login(username, password)
+    server.sendmail(from_address, to_address, message)
+    server.close()
+
