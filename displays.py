@@ -24,12 +24,13 @@ def number_search_doc(outfile, height=14, width=20, cols=3, num_words=33, word_l
     doc.save(outfile)
 
 
-def create_searches(n, func, out_dir="output"):
+def create_searches(n, func, out_dir="output", merge=True):
     """
     Creates n search puzzles.
     :param n: The number of puzzles to create.
     :param func: The puzzle creation method.
     :param out_dir: The output directory.
+    :param merge: Flag representing if all the searches will be merged into one document after.
     """
     for _ in range(n):
         func(out_dir + "/" + datetime.datetime.now().strftime("number_search_%Y%m%d_%H%M%S_%f.docx"))
