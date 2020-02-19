@@ -1,6 +1,5 @@
 from number_search import *
 from docxtpl import DocxTemplate
-import os
 import utils
 
 
@@ -38,7 +37,4 @@ def create_searches(n, func, outdir="output", merge=True):
 
     if merge:
         utils.merge_word_documents(outdir)
-        for f in os.listdir(outdir):
-            if utils.SEARCH_PREFIX in f and utils.BOOK_PREFIX not in f:
-                os.remove(f"{outdir}/{f}")
 
