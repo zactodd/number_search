@@ -1,6 +1,7 @@
 from number_search import *
 from docxtpl import DocxTemplate
-import datetime
+import os
+import utils
 
 
 def number_search_doc(outfile, height=14, width=20, cols=3, num_words=33, word_len=7):
@@ -24,14 +25,20 @@ def number_search_doc(outfile, height=14, width=20, cols=3, num_words=33, word_l
     doc.save(outfile)
 
 
-def create_searches(n, func, out_dir="output", merge=True):
+def create_searches(n, func, outdir="output", merge=True):
     """
     Creates n search puzzles.
     :param n: The number of puzzles to create.
     :param func: The puzzle creation method.
-    :param out_dir: The output directory.
+    :param outdir: The output directory.
     :param merge: Flag representing if all the searches will be merged into one document after.
     """
     for _ in range(n):
-        func(out_dir + "/" + datetime.datetime.now().strftime("number_search_%Y%m%d_%H%M%S_%f.docx"))
+        func(outdir + "/" + utils.search_name())
+
+    if merge:
+        utils.merge_word_documents(outdir)
+        for f in os.listdir(outdir):
+            if utils.SEARCH_PREFIX in f and utils.BOOK_PREFIX not in f:
+                os.remove(f"{outdir}/{f}")
 
