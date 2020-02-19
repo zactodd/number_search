@@ -7,7 +7,7 @@ from exceptions import assert_login
 def gmail_matches(uid_search_str, login_key="key.json", username=None, password=None):
     """
     Get the unseen emails from given credentials.
-    :param uid_search_str: uid formated search string.
+    :param uid_search_str: uid formatted search string.
     :param login_key: a json file containing the username and password information.
     :param username: the username if not none and :param password is also not none.
     :param password: the password if not none and :param username is also not none.
@@ -33,8 +33,8 @@ def gmail_matches(uid_search_str, login_key="key.json", username=None, password=
 
 def listen_for_gmail(uid_search_str, login_key="key.json", username=None, password=None, wait=60):
     """
-    Genertor for looking for emails
-    :param uid_search_str: uid formated search string.
+    Generator for looking for emails
+    :param uid_search_str: uid formatted search string.
     :param login_key: a json file containing the username and password information.
     :param username: the username
     :param password: the password
