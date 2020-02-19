@@ -1,6 +1,7 @@
 import imaplib
 import time
 import json
+from exceptions import assert_login
 
 
 def gmail_matches(uid_search_str, login_key="key.json", username=None, password=None):
@@ -12,8 +13,7 @@ def gmail_matches(uid_search_str, login_key="key.json", username=None, password=
     :param password: the password if not none and :param username is also not none.
     :return
     """
-    assert (username is None and password is None) or (username is not None and password is not None), \
-        "Both username and password need to be included otherwise use login json file."
+    assert_login(username, password)
     with open(login_key, "r") as f:
         data = json.load(f)
         username, password = data["username"], data["password"]
