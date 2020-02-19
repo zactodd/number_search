@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from exceptions import assert_login
 import os
 
 
@@ -18,8 +19,7 @@ def send_gmail(message, subject, to_address, from_address=None, login_key="key.j
     :param username: the username if not none and :param password is also not none.
     :param password: the password if not none and :param username is also not none.
     """
-    assert (username is None and password is None) or (username is not None and password is not None), \
-        "Both username and password need to be included otherwise use login json file."
+    assert_login(username, password)
     if username is None:
         with open(login_key, "r") as f:
             data = json.load(f)
@@ -44,8 +44,7 @@ def send_gmail_with_attachment(message, subject, attachment, to_address, from_ad
     :param username: the username if not none and :param password is also not none.
     :param password: the password if not none and :param username is also not none.
     """
-    assert (username is None and password is None) or (username is not None and password is not None), \
-        "Both username and password need to be included otherwise use login json file."
+    assert_login(username, password)
 
     if username is None:
         with open(login_key, "r") as f:
