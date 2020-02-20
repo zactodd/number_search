@@ -1,7 +1,7 @@
 import imaplib
 import time
 import json
-from exceptions import assert_login
+from ns.exceptions import assert_login
 
 
 def gmail_matches(uid_search_str, login_key="key.json", username=None, password=None):

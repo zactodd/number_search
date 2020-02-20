@@ -1,6 +1,6 @@
-from reciver import listen_for_gmail
-from sender import send_gmail_with_attachment
-from displays import number_search_doc, create_searches
+from ns.reciver import listen_for_gmail
+from ns.sender import send_gmail_with_attachment
+from ns.displays import number_search_doc, create_searches
 import shutil
 import os
 

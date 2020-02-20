@@ -1,6 +1,6 @@
-from number_search import *
+from ns.number_search import *
 from docxtpl import DocxTemplate
-import utils
+from ns import utils
 
 
 def number_search_doc(outfile, height=14, width=20, cols=3, num_words=33, word_len=7):
