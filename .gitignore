@@ -1,3 +1,5 @@
 .idea
 ns/key.json
 __pycache__
+*-checkpoint.py
+.ipynb_checkpoints/
