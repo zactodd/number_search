@@ -21,7 +21,7 @@ def reply_to_emails(wait=3600):
             shutil.rmtree(TMP_DIR)
         os.mkdir(TMP_DIR)
 
-        create_searches(100, number_search_doc, TMP_DIR)
+        create_searches(250, number_search_doc, TMP_DIR)
         shutil.make_archive("numbersearch", 'zip', TMP_DIR)
         send_gmail_with_attachment("Numbersearch puzzles are attached.", "Numbersearch Puzzles", "numbersearch.zip",
                                    from_address)
@@ -31,3 +31,4 @@ def reply_to_emails(wait=3600):
 
 if __name__ == '__main__':
     reply_to_emails(1)
+
